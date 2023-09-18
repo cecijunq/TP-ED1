@@ -2,7 +2,6 @@
 #include <regex>
 #include <vector>
 
-//testando se funcionou
 class ParametrosInvalidos {};
 
 Avaliacao::Avaliacao(int n, std::vector<int> atributos, std::vector<char> expressao) {

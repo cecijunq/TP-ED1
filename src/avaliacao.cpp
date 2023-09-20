@@ -16,48 +16,53 @@ Avaliacao::Avaliacao(int n, std::vector<int> atributos, std::vector<char> expres
 
 void Avaliacao::percorre_expressao() {
     Pilha parenteses_pos = Pilha();
-    Pilha not_pos = Pilha();
-    Pilha and_pos = Pilha();
-    Pilha or_pos = Pilha();
 
     for(Item *aux = _expressao->get_inicio(); aux != nullptr; aux = aux->get_prox()) {
         if(aux->get_elemento() == '(') {
-            parenteses_pos.empilha(aux->get_elemento());
+            //parenteses_pos.empilha(aux->get_elemento());
+            parenteses_pos.empilha(aux);
 
         } else if(aux->get_elemento() == ')') {
             Item *comeco = parenteses_pos.desempilha();
             avalia_trecho(comeco, aux);
 
+            if (comeco->get_prox() == nullptr) {
+                _expressao->muda_fim(comeco);
+            }
+
         }
     }
 }
 
-int Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
-    for(Item *i = comeco; i < fim; i = i->get_prox()) {
+char Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
+    for(Item *i = comeco; i != fim; i = i->get_prox()) {
         if(i->get_elemento() == '~') {
-            int arg1 = i->get_prox()->get_elemento();
-            i->set_elemento(!arg1);
+            char arg1 = i->get_prox()->get_elemento();
+            i->set_elemento(avalia_not(arg1));
             i->set_novo_prox(i->get_prox()->get_prox());
+            
         }
     }
 
     for(Item *i = comeco; i < fim; i = i->get_prox()) {
         if(i->get_elemento() == '&') {
-            int arg1 = i->get_ant()->get_elemento();
-            int arg2 = i->get_prox()->get_elemento();
+            char arg1 = i->get_ant()->get_elemento();
+            char arg2 = i->get_prox()->get_elemento();
 
-            i->set_elemento(avalia_and(arg1, arg2));
-            i->set_novo_prox(i->get_prox()->get_prox());
+            i->get_ant()->set_elemento(avalia_and(arg1, arg2));
+            i->get_ant()->set_novo_prox(i->get_prox()->get_prox());
+            i->get_prox()->set_novo_ant(i);
         }
     }
 
     for(Item *i = comeco; i < fim; i = i->get_prox()) {
         if(i->get_elemento() == '|') {
-            int arg1 = i->get_ant()->get_elemento();
-            int arg2 = i->get_prox()->get_elemento();
+            char arg1 = i->get_ant()->get_elemento();
+            char arg2 = i->get_prox()->get_elemento();
 
-            i->set_elemento(avalia_or(arg1, arg2));
-            i->set_novo_prox(i->get_prox()->get_prox());
+            i->get_ant()->set_elemento(avalia_or(arg1, arg2));
+            i->get_ant()->set_novo_prox(i->get_prox()->get_prox());
+            i->get_prox()->set_novo_ant(i);
         }
     }
     
@@ -66,18 +71,25 @@ int Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
     return comeco->get_elemento(); 
 }
 
-int Avaliacao::avalia_or(int arg1, int arg2) {
-    if(arg1 == 1 || arg2 == 1) {
-        return 1;
+char Avaliacao::avalia_not(char arg1) {
+    if(arg1 == '1') {
+        return '1';
     }
-    return 0;
+    return '0';
 }
 
-int Avaliacao::avalia_and(int arg1, int arg2) {
-    if(arg1 == 1 && arg2 == 1) {
-        return 1;
+char Avaliacao::avalia_or(char arg1, char arg2) {
+    if(arg1 == '1' || arg2 == '1') {
+        return '1';
     }
-    return 0;
+    return '0';
+}
+
+char Avaliacao::avalia_and(char arg1, char arg2) {
+    if(arg1 == '1' && arg2 == '1') {
+        return '1';
+    }
+    return '0';
 }
 
 /*int Avaliacao::avalia_expressao() {

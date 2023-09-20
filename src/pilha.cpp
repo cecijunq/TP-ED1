@@ -22,7 +22,15 @@ int Pilha::getTamanho() {
     return _tamanho;
 }
 
-void Pilha::empilha(int item) {
+void Pilha::empilha(Item *item) {
+    if(_tamanho == 0) 
+        inicio = item;
+    item->linka_elementos(fim);
+    fim = item;
+    _tamanho++;
+}
+/*
+void Pilha::empilha(char item) {
     Item *novo = new Item(item, fim);
 
     if(_tamanho == 0) 
@@ -30,6 +38,7 @@ void Pilha::empilha(int item) {
     fim = novo;
     _tamanho++;
 }
+*/
 
 Item *Pilha::desempilha() {
     if(getTamanho() == 0) {

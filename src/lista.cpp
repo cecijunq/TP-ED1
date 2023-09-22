@@ -7,7 +7,7 @@ Lista::Lista(std::string expressao, std::string atributos) {
     _tamanho = 0;
     Item *novo;
 
-    for(int i = 0; i < expressao.size(); i++) {
+    for(unsigned int i = 0; i < expressao.size(); i++) {
         if(expressao[i] != ' ') {
             std::cout << expressao[i] << std::endl;
             if(_tamanho == 0) {

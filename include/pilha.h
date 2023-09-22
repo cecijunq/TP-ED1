@@ -3,20 +3,19 @@
 
 #include <iostream>
 #include "./tipo_item.h"
+#include "./item_pilha.h"
 
 class Pilha {
     private:
-        //int _posicoes[100];
+
         unsigned int _tamanho;
-        Item *inicio;
-        Item *fim;
+        ItemPilha *inicio;
+        ItemPilha *fim;
     public:
         Pilha();
-        //Item *get_next_element();
-        Item *get_inicio();
-        Item *get_fim();
+        ItemPilha *get_inicio();
+        ItemPilha *get_fim();
         int getTamanho();
-        //void empilha(char item);
         void empilha(Item *item);
         Item *desempilha();
 };

@@ -14,8 +14,9 @@ Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
 char Avaliacao::percorre_expressao() {
     std::cout << "entrou 15" << std::endl;
     Pilha parenteses_pos = Pilha();
-
+    
     for(Item *aux = _expressao->get_inicio(); aux != nullptr; aux = aux->get_prox()) {
+        std::cout << aux->get_elemento() << std::endl;
         if(aux->get_elemento() == '(') {
             std::cout << "entrou 20" << std::endl;
             //parenteses_pos.empilha(aux->get_elemento());
@@ -32,39 +33,45 @@ char Avaliacao::percorre_expressao() {
             if (comeco->get_ant() == nullptr) {
                 _expressao->muda_inicio(comeco);
             }
-            
-
         }
     }
     return _expressao->get_inicio()->get_elemento();
 }
 
+
 void Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
-    char arg1, arg2;
+    Item *arg1, *arg2;
     std::cout << "entrou 44" << std::endl;
     for(Item *i = comeco; i != fim; i = i->get_prox()) {
+        std::cout << i->get_elemento() << std::endl;
         switch (i->get_elemento()) {
             case '~':
-                arg1 = i->get_prox()->get_elemento();
-                std::cout << arg1 << std::endl;
-                i->set_elemento(avalia_not(arg1));
-                i->set_novo_prox(i->get_prox()->get_prox());
+                arg1 = i->get_prox();
+                
+                i->set_elemento(avalia_not(arg1->get_elemento()));
+                i->set_novo_prox(arg1->get_prox());
+                arg1->get_prox()->set_novo_ant(i);
+                delete arg1;
                 break;
 
             case '&':
-                arg1 = i->get_prox()->get_elemento();
-                i->get_ant()->set_elemento(avalia_and(arg1, arg2));
-                i->get_ant()->set_novo_prox(i->get_prox()->get_prox());
-                i->get_prox()->set_novo_ant(i->get_prox()->get_prox());
+                arg1 = i->get_ant();
+                arg2 = i->get_prox();
+
+                arg1->set_elemento(avalia_and(arg1->get_elemento(), arg2->get_elemento()));
+                arg1->set_novo_prox(arg2->get_prox());
+                arg2->get_prox()->set_novo_ant(arg1);
+                delete arg2;
                 break;
             
             case '|':
-                arg1 = i->get_ant()->get_elemento();
-                arg2 = i->get_prox()->get_elemento();
+                arg1 = i->get_ant();
+                arg2 = i->get_prox();
 
-                i->get_ant()->set_elemento(avalia_or(arg1, arg2));
-                i->get_ant()->set_novo_prox(i->get_prox()->get_prox());
-                i->get_prox()->set_novo_ant(i->get_prox()->get_prox());
+                arg1->set_elemento(avalia_or(arg1->get_elemento(), arg2->get_elemento()));
+                arg1->set_novo_prox(arg2->get_prox());
+                arg2->get_prox()->set_novo_ant(arg1);
+                delete arg2;
                 break;
         }
     }
@@ -108,9 +115,9 @@ void Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
 
 char Avaliacao::avalia_not(char arg1) {
     if(arg1 == '1') {
-        return '1';
+        return '0';
     }
-    return '0';
+    return '1';
 }
 
 char Avaliacao::avalia_or(char arg1, char arg2) {

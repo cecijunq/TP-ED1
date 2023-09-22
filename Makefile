@@ -14,8 +14,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o $(OBJ)/lista.o $(OBJ)/pilha.o $(OBJ)/avaliacao.o $(OBJ)/tipo_item.o
-HDRS = $(INC)/lista.h $(INC)/pilha.h $(INC)/avaliacao.h $(INC)/tipo_item.h
+OBJS = $(OBJ)/main.o $(OBJ)/lista.o $(OBJ)/pilha.o $(OBJ)/avaliacao.o $(OBJ)/tipo_item.o $(OBJ)/item_pilha.o
+HDRS = $(INC)/lista.h $(INC)/pilha.h $(INC)/avaliacao.h $(INC)/tipo_item.h $(INC)/item_pilha.h
 CFLAGS = -Wall -c -I$(INC)
 
 EXE = $(BIN)/main
@@ -40,6 +40,9 @@ $(OBJ)/avaliacao.o: $(HDRS) $(SRC)/avaliacao.cpp
 
 $(OBJ)/tipo_item.o: $(HDRS) $(SRC)/tipo_item.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/tipo_item.o $(SRC)/tipo_item.cpp 
+
+$(OBJ)/item_pilha.o: $(HDRS) $(SRC)/item_pilha.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/item_pilha.o $(SRC)/item_pilha.cpp 
 	
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out

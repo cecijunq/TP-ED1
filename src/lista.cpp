@@ -27,8 +27,14 @@ Lista::Lista(std::string expressao, std::string atributos) {
         }
     }
 
+    std::cout << "endereço fim = " << fim << std::endl;
+    std::cout << "endereço inicio = " << inicio << std::endl;
     for(Item *c = inicio; c != nullptr; c = c->get_prox()) {
-        std::cout << c->get_elemento() << " ";
+        std::cout << c << std::endl;
+        std::cout << c->get_elemento() << std::endl;
+        std::cout << c->get_ant() << std::endl;
+        std::cout << c->get_prox() << std::endl;
+        std::cout << std::endl;
     }
 }
 

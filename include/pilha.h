@@ -12,7 +12,7 @@ class Pilha {
         Item *fim;
     public:
         Pilha();
-        Item *get_next_element();
+        //Item *get_next_element();
         Item *get_inicio();
         Item *get_fim();
         int getTamanho();

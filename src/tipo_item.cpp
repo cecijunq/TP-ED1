@@ -1,10 +1,17 @@
 #include "../include/tipo_item.h"
 
-Item::Item(int elemento, Item *anterior) {
+Item::Item(char elemento, Item *anterior) {
     _elemento = elemento;
     _anterior = anterior;
     _proximo = nullptr;
 }
+/*
+Item::Item() {
+    _elemento = '3';
+    _anterior = nullptr;
+    _proximo = nullptr;
+}
+*/
 
 Item::~Item() {}
 

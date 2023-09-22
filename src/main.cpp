@@ -6,11 +6,14 @@
 
 
 int main(int argc, char **argv) {
-    if(argc != 4) {
+    if(argc != 3) {
         std::cout << "Quantidade inválida de parâmetros." << std::endl;
         return 1;
     }
 
+    Avaliacao a = Avaliacao(argv[1], argv[2]);
+
+    std::cout << "RESULTADO AQUI: " << a.percorre_expressao() << std::endl;
 //    std::vector<char> expr(argv[2].begin(), str.end());
 
 }

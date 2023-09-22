@@ -6,9 +6,7 @@ Pilha::Pilha() {
     fim = nullptr;
 }
 
-Item *Pilha::get_next_element() {
-
-}
+//Item *Pilha::get_next_element() {}
 
 Item *Pilha::get_inicio() {
     return inicio;

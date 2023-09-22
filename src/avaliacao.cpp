@@ -14,6 +14,7 @@ Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
 char Avaliacao::percorre_expressao() {
     std::cout << "entrou 15" << std::endl;
     Pilha parenteses_pos = Pilha();
+    //teste
     
     for(Item *aux = _expressao->get_inicio(); aux != nullptr; aux = aux->get_prox()) {
         std::cout << aux->get_elemento() << std::endl;

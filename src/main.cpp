@@ -14,6 +14,4 @@ int main(int argc, char **argv) {
     Avaliacao a = Avaliacao(argv[1], argv[2]);
 
     std::cout << "RESULTADO AQUI: " << a.percorre_expressao() << std::endl;
-//    std::vector<char> expr(argv[2].begin(), str.end());
-
 }

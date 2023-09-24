@@ -2,14 +2,12 @@
 #include <string>
 
 Lista::Lista(std::string expressao, std::string atributos) {
-    //inicio = new Item();
-    //fim = new Item();
     _tamanho = 0;
     Item *novo;
 
     for(unsigned int i = 0; i < expressao.size(); i++) {
         if(expressao[i] != ' ') {
-            std::cout << expressao[i] << std::endl;
+            //std::cout << expressao[i] << std::endl;
             if(_tamanho == 0) {
                 novo = new Item(expressao[i], nullptr);
                 inicio = novo;
@@ -27,6 +25,7 @@ Lista::Lista(std::string expressao, std::string atributos) {
         }
     }
 
+    /*
     std::cout << "endereço fim = " << fim << std::endl;
     std::cout << "endereço inicio = " << inicio << std::endl;
     for(Item *c = inicio; c != nullptr; c = c->get_prox()) {
@@ -35,10 +34,8 @@ Lista::Lista(std::string expressao, std::string atributos) {
         std::cout << c->get_ant() << std::endl;
         std::cout << c->get_prox() << std::endl;
         std::cout << std::endl;
-    }
+    }*/
 }
-
-//Item *Lista::get_next_element() {}
 
 Item *Lista::get_inicio() {
     return inicio;
@@ -63,5 +60,3 @@ void Lista::muda_fim(Item *novo_elemento) {
 void Lista::muda_inicio(Item *novo_elemento) {
     inicio = novo_elemento;
 }
-
-//void Lista::adiciona_elemento(Item *item) {}

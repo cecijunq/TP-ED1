@@ -21,7 +21,7 @@ CFLAGS = -Wall -c -I$(INC)
 EXE = $(BIN)/main
 
 all:  $(EXE)
-	$(EXE) "~ ( 0 | 1 ) & 2" 101
+	$(EXE) "~ ( 1 | 0 ) & 2" 101
 
 $(BIN)/main: $(OBJS)
 	$(CC) -g -o $(BIN)/main $(OBJS) $(LIBS)

@@ -21,14 +21,14 @@ int Pilha::getTamanho() {
 }
 
 void Pilha::empilha(Item *item) {
-    ItemPilha *item_p = new ItemPilha(item);
+    ItemPilha *item_p = new ItemPilha(item, fim);
 
     if(_tamanho == 0) {
         inicio = item_p;
     } else {
-        item_p->conecta_anterior(fim);
         fim->conecta_proximo(item_p);
     }
+    //else {//item_p->conecta_anterior(fim);}
     fim = item_p;
     _tamanho++;
 }
@@ -51,8 +51,9 @@ Item *Pilha::desempilha() {
 
     _tamanho--;
     ItemPilha *aux = fim->get_anterior();
+    //ItemPilha *aux2 = fim;
     ItemPilha *desempilhado = fim;
-    delete fim;
+    //delete aux2;
     fim = aux;
 
     return desempilhado->get_container_item();

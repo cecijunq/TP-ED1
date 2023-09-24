@@ -26,6 +26,8 @@ char Avaliacao::percorre_expressao() {
         } else if(aux->get_elemento() == ')') {
             std::cout << "entrou 25" << std::endl;
             Item *comeco = parenteses_pos.desempilha();
+            std::cout << comeco->get_elemento() << std::endl;
+            std::cout << comeco << std::endl;
             avalia_trecho(comeco, aux);
 
             if (comeco->get_prox() == nullptr) {
@@ -43,7 +45,10 @@ char Avaliacao::percorre_expressao() {
 void Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
     Item *arg1, *arg2;
     std::cout << "entrou 44" << std::endl;
-    for(Item *i = comeco; i != fim; i = i->get_prox()) {
+    std::cout << comeco->get_elemento() << std::endl;
+    std::cout << comeco->get_prox()->get_elemento() << std::endl;
+    
+    for(Item *i = comeco->get_prox(); i != fim; i = i->get_prox()) {
         std::cout << i->get_elemento() << std::endl;
         switch (i->get_elemento()) {
             case '~':
@@ -52,7 +57,7 @@ void Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
                 i->set_elemento(avalia_not(arg1->get_elemento()));
                 i->set_novo_prox(arg1->get_prox());
                 arg1->get_prox()->set_novo_ant(i);
-                delete arg1;
+                //delete arg1;
                 break;
 
             case '&':
@@ -62,22 +67,23 @@ void Avaliacao::avalia_trecho(Item *comeco, Item *fim) {
                 arg1->set_elemento(avalia_and(arg1->get_elemento(), arg2->get_elemento()));
                 arg1->set_novo_prox(arg2->get_prox());
                 arg2->get_prox()->set_novo_ant(arg1);
-                delete arg2;
+                //delete arg2;
                 break;
             
             case '|':
                 arg1 = i->get_ant();
                 arg2 = i->get_prox();
 
+                //std::cout << "xxx: " << avalia_or(arg1->get_elemento(), arg2->get_elemento()) << std::endl;
                 arg1->set_elemento(avalia_or(arg1->get_elemento(), arg2->get_elemento()));
-                arg1->set_novo_prox(arg2->get_prox());
+                arg1->set_novo_prox(fim->get_prox());
                 arg2->get_prox()->set_novo_ant(arg1);
-                delete arg2;
+                //delete arg2;
                 break;
         }
     }
     comeco = comeco->get_prox();
-    comeco->set_novo_prox(fim->get_prox());
+    //comeco->set_novo_prox(fim->get_prox());
     fim->get_prox()->set_novo_ant(comeco);
     //return comeco->get_elemento(); 
     /*

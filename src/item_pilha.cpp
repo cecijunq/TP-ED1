@@ -1,8 +1,8 @@
 #include "../include/item_pilha.h"
 
-ItemPilha::ItemPilha(Item *item) {
+ItemPilha::ItemPilha(Item *item, ItemPilha *anterior) {
     _elemento = item;
-    _anterior = nullptr;
+    _anterior = anterior;
     _proximo = nullptr;
 }
 

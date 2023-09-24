@@ -10,7 +10,7 @@ class Item {
         Item *_anterior;
     public:
         Item(char elemento, Item *anterior);
-        //Item();
+        Item();
         //Item(int elemento, Item *anterior);
         ~Item();
         char get_elemento();

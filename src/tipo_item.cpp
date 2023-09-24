@@ -5,6 +5,8 @@ Item::Item(char elemento, Item *anterior) {
     _anterior = anterior;
     _proximo = nullptr;
 }
+
+Item::Item() {}
 /*
 Item::Item() {
     _elemento = '3';

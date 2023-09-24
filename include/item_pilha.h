@@ -10,7 +10,7 @@ class ItemPilha {
         ItemPilha *_proximo;
 
     public:
-        ItemPilha(Item *item);
+        ItemPilha(Item *item, ItemPilha *anterior);
         Item *get_container_item();
         void conecta_anterior(ItemPilha *anterior);
         void conecta_proximo(ItemPilha *proximo);

@@ -136,7 +136,7 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                     operadores->muda_inicio(novo);
 
                 } else {
-                    
+                    /*
                     if(expressao[i] != '(' && expressao[i] != ')' && operadores->get_fim()->get_elemento() != '(') {
                         while(precedence(expressao[i]) < precedence(operadores->get_fim()->get_elemento())) {
                             std::cout << "teste" << std::endl;
@@ -148,6 +148,7 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                             operadores->get_fim()->set_novo_ant(novo);
                         }
                     }
+                    */
                     
 
                     if(expressao[i] == ')') {
@@ -173,6 +174,20 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
 
                 }
                 operadores->muda_fim(novo);
+                Item *aux = operadores->get_fim();
+                while((aux->get_ant() != nullptr) && (aux->get_elemento()) < precedence(aux->get_ant()->get_elemento())) {
+                    Item *tmp = aux->get_ant();
+                    std::cout << "teste" << std::endl;
+                    aux->set_novo_prox(tmp);
+                    tmp->set_novo_prox(nullptr);
+                    aux->set_novo_ant(tmp->get_ant());
+                    tmp->get_ant()->set_novo_prox(aux);
+                    tmp->set_novo_ant(aux);
+                    if(aux->get_ant() == nullptr) {
+                        operadores->muda_inicio(aux);
+                    }
+                    operadores->muda_fim(tmp);
+                }
                 /*
                 Item *aux = operadores->get_fim();
                 while(precedence(aux->get_elemento()) < precedence(aux->get_ant()->get_elemento())) {

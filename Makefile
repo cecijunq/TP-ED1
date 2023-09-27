@@ -24,6 +24,7 @@ all:  $(EXE)
 	$(EXE) "0 | 1" 10
 	$(EXE) "0 | 1 & 2" 010
 	$(EXE) "~ ( 0 | 1 ) & 2" 001
+	$(EXE) " 1 & ~ 2 | ( 1 & 0 )" 001
 
 $(BIN)/main: $(OBJS)
 	$(CC) -g -o $(BIN)/main $(OBJS) $(LIBS)

@@ -136,8 +136,10 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                     operadores->muda_inicio(novo);
 
                 } else {
+                    
                     if(expressao[i] != '(' && expressao[i] != ')' && operadores->get_fim()->get_elemento() != '(') {
                         while(precedence(expressao[i]) < precedence(operadores->get_fim()->get_elemento())) {
+                            std::cout << "teste" << std::endl;
                             novo = new Item(expressao[i], operadores->get_fim()->get_ant());
                             novo->set_novo_prox(operadores->get_fim());
                             if(operadores->get_fim()->get_ant() == nullptr) {
@@ -146,6 +148,7 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                             operadores->get_fim()->set_novo_ant(novo);
                         }
                     }
+                    
 
                     if(expressao[i] == ')') {
                         while(operadores->get_fim()!= nullptr) {
@@ -167,8 +170,28 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                         novo = new Item(expressao[i], operadores->get_fim());
                         operadores->get_fim()->set_novo_prox(novo);
                     }
+
                 }
                 operadores->muda_fim(novo);
+                /*
+                Item *aux = operadores->get_fim();
+                while(precedence(aux->get_elemento()) < precedence(aux->get_ant()->get_elemento())) {
+                    std::cout << "teste" << std::endl;
+                    //Item *ultimo = aux;
+                    Item *penultipo = aux->get_ant();
+                    //novo = new Item(expressao[i], operadores->get_fim()->get_ant());
+                    aux->set_novo_ant(penultipo->get_ant());
+                    aux->set_novo_prox(penultipo);
+                    if(aux->get_ant() != nullptr) {
+                        aux->get_ant()->set_novo_prox(aux);
+                    } else {
+                        operadores->muda_inicio(novo);
+                    }
+                    penultipo->set_novo_ant(aux);
+                    penultipo->set_novo_prox(nullptr);
+                    operadores->muda_fim(penultipo);
+                }
+                */
 
             } else {
                 if(stack->get_inicio() == nullptr) {
@@ -181,6 +204,9 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                 stack->muda_fim(novo);
 
             }
+
+            
+            //if(operadores->get_fim()->get_elemento() != '(' && expressao[i] != ')' && operadores->get_fim()->get_elemento() != '(') {}
 
         }
     }

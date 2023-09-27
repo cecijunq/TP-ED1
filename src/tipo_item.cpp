@@ -7,13 +7,6 @@ Item::Item(char elemento, Item *anterior) {
 }
 
 Item::Item() {}
-/*
-Item::Item() {
-    _elemento = '3';
-    _anterior = nullptr;
-    _proximo = nullptr;
-}
-*/
 
 Item::~Item() {}
 
@@ -44,4 +37,8 @@ Item *Item::get_ant() {
 void Item::linka_elementos(Item *anterior) {
     _anterior = anterior;
     _proximo = nullptr;
+}
+
+void Item::conecta_proximo(Item *proximo) {
+    _proximo = proximo;
 }

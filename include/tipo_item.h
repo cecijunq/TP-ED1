@@ -20,6 +20,7 @@ class Item {
         Item *get_prox();
         Item *get_ant();
         void linka_elementos(Item *novo);
+        void conecta_proximo(Item *proximo);
 };
 
 #endif

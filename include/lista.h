@@ -11,11 +11,12 @@ class Lista {
         Item *inicio;
         Item *fim;
     public:
-        Lista(std::string expressao, std::string atributos);
+        Lista();
+        //Lista(std::string expressao, std::string atributos);
         Item *get_inicio();
         Item *get_fim();
         int getTamanho();
-        void adiciona_inicio(Item *novo_elemento);
+        //void adiciona_inicio(Item *novo_elemento);
         void muda_fim(Item *novo_elemento);
         void muda_inicio(Item *novo_elemento);
 };

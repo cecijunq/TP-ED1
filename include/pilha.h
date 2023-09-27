@@ -9,12 +9,12 @@ class Pilha {
     private:
 
         unsigned int _tamanho;
-        ItemPilha *inicio;
-        ItemPilha *fim;
+        Item *inicio;
+        Item *fim;
     public:
         Pilha();
-        ItemPilha *get_inicio();
-        ItemPilha *get_fim();
+        Item *get_inicio();
+        Item *get_fim();
         int getTamanho();
         void empilha(Item *item);
         Item *desempilha();

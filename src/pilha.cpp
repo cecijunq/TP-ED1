@@ -8,11 +8,11 @@ Pilha::Pilha() {
 
 //Item *Pilha::get_next_element() {}
 
-ItemPilha *Pilha::get_inicio() {
+Item *Pilha::get_inicio() {
     return inicio;
 }
 
-ItemPilha *Pilha::get_fim() {
+Item *Pilha::get_fim() {
     return fim;
 }
 
@@ -21,20 +21,31 @@ int Pilha::getTamanho() {
 }
 
 void Pilha::empilha(Item *item) {
-    ItemPilha *item_p = new ItemPilha(item, fim);
+    //Item *item_p = new Item(item, fim);
 
-    if(_tamanho == 0) {
+    /*if(_tamanho == 0) {
         inicio = item_p;
     } else {
-        fim->conecta_proximo(item_p);
+        if(item->get_elemento() == '~' && (fim->get_container_item()->get_elemento() == '&' || fim->get_container_item()->get_elemento() == '|')) {
+
+        } else if(item->get_elemento() == '&' && fim->get_container_item()->get_elemento() == '|') {
+
+        } else {
+            fim->conecta_proximo(item_p);
+        }
+    } */
+    if(_tamanho == 0) {
+        inicio = item;
+    } else {
+        fim->conecta_proximo(item);
     }
     //else {//item_p->conecta_anterior(fim);}
-    fim = item_p;
+    fim = item;
     _tamanho++;
 }
 /*
 void Pilha::empilha(char item) {
-    ItemPilha *novo = new Item(item, fim);
+    Item *novo = new Item(item, fim);
 
     if(_tamanho == 0) 
         inicio = novo;
@@ -50,11 +61,11 @@ Item *Pilha::desempilha() {
     }
 
     _tamanho--;
-    ItemPilha *aux = fim->get_anterior();
-    //ItemPilha *aux2 = fim;
-    ItemPilha *desempilhado = fim;
+    Item *aux = fim->get_ant();
+    //Item *aux2 = fim;
+    Item *desempilhado = fim;
     //delete aux2;
     fim = aux;
 
-    return desempilhado->get_container_item();
+    return desempilhado;
 }

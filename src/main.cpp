@@ -13,5 +13,5 @@ int main(int argc, char **argv) {
 
     Avaliacao a = Avaliacao(argv[1], argv[2]);
 
-    std::cout << "RESULTADO AQUI: " << a.percorre_expressao() << std::endl;
+    std::cout << "RESULTADO AQUI: " << a.avalia_trecho() << std::endl;
 }

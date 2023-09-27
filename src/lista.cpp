@@ -1,7 +1,13 @@
 #include "../include/lista.h"
+#include "../include/pilha.h"
 #include <string>
 
-Lista::Lista(std::string expressao, std::string atributos) {
+Lista::Lista() {
+    _tamanho = 0;
+    inicio = nullptr;
+    fim = nullptr;
+}
+/*Lista::Lista(std::string expressao, std::string atributos) {
     _tamanho = 0;
     Item *novo;
 
@@ -25,7 +31,7 @@ Lista::Lista(std::string expressao, std::string atributos) {
         }
     }
 
-    /*
+    
     std::cout << "endereço fim = " << fim << std::endl;
     std::cout << "endereço inicio = " << inicio << std::endl;
     for(Item *c = inicio; c != nullptr; c = c->get_prox()) {
@@ -34,8 +40,9 @@ Lista::Lista(std::string expressao, std::string atributos) {
         std::cout << c->get_ant() << std::endl;
         std::cout << c->get_prox() << std::endl;
         std::cout << std::endl;
-    }*/
-}
+    }
+} 
+*/
 
 Item *Lista::get_inicio() {
     return inicio;
@@ -49,9 +56,9 @@ int Lista::getTamanho() {
     return _tamanho;
 }
 
-void Lista::adiciona_inicio(Item *novo_elemento) {
-    inicio = novo_elemento;
-}
+//void Lista::adiciona_inicio(Item *novo_elemento) {
+//    inicio = novo_elemento;
+//}
 
 void Lista::muda_fim(Item *novo_elemento) {
     fim = novo_elemento;

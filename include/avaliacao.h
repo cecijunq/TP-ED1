@@ -7,19 +7,19 @@
 
 class Avaliacao {
     private:
-        //int _resultado;
-        //int _n;
-        /*
-        Pilha *_atributos;
-        Pilha *_expressao;
-        */
-        //Lista *_atributos;
-        Lista *_expressao;
+        //Lista *_expressao;
+        Lista *stack;
+        Lista *operadores;
+       // Lista *stack;
+       // Lista *operadores;
 
     public:
         Avaliacao(std::string expressao, std::string atributos);
-        char percorre_expressao();
-        void avalia_trecho(Item *comeco, Item *fim);
+        void postfixEval(std::string expressao, std::string atributos);
+        //char percorre_expressao();
+        int precedence(char operador);
+        char avalia_trecho();
+        //void avalia_trecho(Item *comeco, Item *fim);
         //int avalia_expressao();
         char avalia_or(char arg1, char arg2);
         char avalia_and(char arg1, char arg2);

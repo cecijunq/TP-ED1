@@ -1,8 +1,8 @@
 #ifndef AVALIACAO_H
 #define AVALIACAO_H
 
-#include <vector>
-#include "./pilha.h"
+//#include <vector>
+//#include "./pilha.h"
 #include "./lista.h"
 
 class Avaliacao {

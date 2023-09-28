@@ -1,9 +1,6 @@
 #include "../include/avaliacao.h"
-//#include <regex>
-//#include <vector>
 
 class ParametrosInvalidos {};
-
 
 Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
     if(atributos.size() > 10e6 || expressao.size() > 100) {

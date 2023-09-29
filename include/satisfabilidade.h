@@ -5,10 +5,11 @@
 
 class Satisfabilidade {
     private:
-
+        Avaliacao *a;
 
     public:
         Satisfabilidade(std::string expressao, std::string atributos);
+        
 };
 
 #endif

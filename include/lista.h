@@ -18,6 +18,7 @@ class Lista {
         int getTamanho();
         void muda_fim(Item *novo_elemento);
         void muda_inicio(Item *novo_elemento);
+        void set_nesimo_item(int pos, char n);
 };
 
 #endif

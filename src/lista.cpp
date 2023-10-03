@@ -27,3 +27,11 @@ void Lista::muda_fim(Item *novo_elemento) {
 void Lista::muda_inicio(Item *novo_elemento) {
     inicio = novo_elemento;
 }
+
+void Lista::set_nesimo_item(int pos, char n) {
+    Item *aux = inicio;
+    for(int i = 0; i <= pos; i++) {
+        aux->get_prox();
+    }
+    aux->set_elemento(n);
+}

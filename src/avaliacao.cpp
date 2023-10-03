@@ -8,10 +8,12 @@ Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
     }
 
     _tamanho = 0;
-    stack = new Lista();
-    operadores = new Lista();
+    stack = Lista();
+    operadores = Lista();
     postfixEval(expressao, atributos);
 }
+
+Avaliacao::Avaliacao() {}
 
 int Avaliacao::precedence(char operador) {
     switch (operador) {
@@ -32,35 +34,36 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
         if(expressao[i] != ' ') {
             if(expressao[i] == '~' || expressao[i] == '&' || expressao[i] == '|' || expressao[i] == '(' || expressao[i] == ')') {
 
-                if(operadores->get_inicio() == nullptr) {
+                if(operadores.get_inicio() == nullptr) {
                     novo = new Item(expressao[i], nullptr);
-                    operadores->muda_inicio(novo);
+                    operadores.muda_inicio(novo);
 
                 } else {
                     if(expressao[i] == ')') {
-                        while(operadores->get_fim()!= nullptr) {
-                            if(operadores->get_fim()->get_elemento() != '(') {
-                                stack->get_fim()->set_novo_prox(operadores->get_fim());
-                                operadores->muda_fim(operadores->get_fim()->get_ant());
-                                stack->get_fim()->get_prox()->set_novo_ant(stack->get_fim());
-                                stack->muda_fim(stack->get_fim()->get_prox());
-                                if(operadores->get_fim() != nullptr)
-                                    operadores->get_fim()->set_novo_prox(nullptr);
+                        while(operadores.get_fim()!= nullptr) {
+                            if(operadores.get_fim()->get_elemento() != '(') {
+                                _tamanho++;
+                                stack.get_fim()->set_novo_prox(operadores.get_fim());
+                                operadores.muda_fim(operadores.get_fim()->get_ant());
+                                stack.get_fim()->get_prox()->set_novo_ant(stack.get_fim());
+                                stack.muda_fim(stack.get_fim()->get_prox());
+                                if(operadores.get_fim() != nullptr)
+                                    operadores.get_fim()->set_novo_prox(nullptr);
                             } else {
-                                operadores->muda_fim(operadores->get_fim()->get_ant());
-                                operadores->get_fim()->set_novo_prox(nullptr);
+                                operadores.muda_fim(operadores.get_fim()->get_ant());
+                                operadores.get_fim()->set_novo_prox(nullptr);
                             }
                         }
-                        if(operadores->get_fim() == nullptr) operadores->muda_inicio(nullptr);
+                        if(operadores.get_fim() == nullptr) operadores.muda_inicio(nullptr);
                     }
                     else {
-                        novo = new Item(expressao[i], operadores->get_fim());
-                        operadores->get_fim()->set_novo_prox(novo);
+                        novo = new Item(expressao[i], operadores.get_fim());
+                        operadores.get_fim()->set_novo_prox(novo);
                     }
 
                 }
-                operadores->muda_fim(novo);
-                Item *aux = operadores->get_fim();
+                operadores.muda_fim(novo);
+                Item *aux = operadores.get_fim();
                 while((aux->get_ant() != nullptr) && (aux->get_elemento()) < precedence(aux->get_ant()->get_elemento())) {
                     Item *tmp = aux->get_ant();
                     aux->set_novo_prox(tmp);
@@ -69,42 +72,45 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                     tmp->get_ant()->set_novo_prox(aux);
                     tmp->set_novo_ant(aux);
                     if(aux->get_ant() == nullptr) {
-                        operadores->muda_inicio(aux);
+                        operadores.muda_inicio(aux);
                     }
-                    operadores->muda_fim(tmp);
+                    operadores.muda_fim(tmp);
                 }
 
             } else {
-                
-                if(stack->get_inicio() == nullptr) {
+                _tamanho++;
+                if(stack.get_inicio() == nullptr) {
                     novo = new Item(atributos[expressao[i] - '0'], nullptr);
-                    stack->muda_inicio(novo);
+                    stack.muda_inicio(novo);
                 } else {
-                    novo = new Item(atributos[expressao[i] - '0'], stack->get_fim());
-                    stack->get_fim()->set_novo_prox(novo);
+                    novo = new Item(atributos[expressao[i] - '0'], stack.get_fim());
+                    stack.get_fim()->set_novo_prox(novo);
                 }
-                stack->muda_fim(novo);
-
+                stack.muda_fim(novo);
             }
         }
     }
     
-    while(operadores->get_fim() != nullptr) {
-        stack->get_fim()->set_novo_prox(operadores->get_fim());
-        operadores->muda_fim(operadores->get_fim()->get_ant());
-        stack->get_fim()->get_prox()->set_novo_ant(stack->get_fim());
-        stack->muda_fim(stack->get_fim()->get_prox());
-        if(operadores->get_fim() != nullptr)
-            operadores->get_fim()->set_novo_prox(nullptr);
+    while(operadores.get_fim() != nullptr) {
+        stack.get_fim()->set_novo_prox(operadores.get_fim());
+        operadores.muda_fim(operadores.get_fim()->get_ant());
+        stack.get_fim()->get_prox()->set_novo_ant(stack.get_fim());
+        stack.muda_fim(stack.get_fim()->get_prox());
+        if(operadores.get_fim() != nullptr)
+            operadores.get_fim()->set_novo_prox(nullptr);
         else
-            operadores->muda_inicio(nullptr);
-
+            operadores.muda_inicio(nullptr);
+        _tamanho++;
     }
+}
+
+Lista Avaliacao::get_stack() {
+    return stack;
 }
 
 char Avaliacao::avalia_trecho() {
     Item *arg1, *arg2;
-    for (Item *aux = stack->get_inicio(); aux != nullptr; aux = aux->get_prox()) {
+    for (Item *aux = stack.get_inicio(); aux != nullptr; aux = aux->get_prox()) {
         switch (aux->get_elemento()) {
             case '~':
                 arg1 = aux->get_ant();
@@ -124,7 +130,7 @@ char Avaliacao::avalia_trecho() {
                 if(arg2->get_ant() != nullptr)
                     arg2->get_ant()->set_novo_prox(aux);
                 else
-                    stack->muda_inicio(aux);
+                    stack.muda_inicio(aux);
                 break;
             
             case '|':
@@ -136,13 +142,13 @@ char Avaliacao::avalia_trecho() {
                 if(arg2->get_ant() != nullptr)
                     arg2->get_ant()->set_novo_prox(aux);
                 else
-                    stack->muda_inicio(aux);
+                    stack.muda_inicio(aux);
                 break;
             default:
                 continue;
         }
     }
-    return stack->get_inicio()->get_elemento();
+    return stack.get_inicio()->get_elemento();
 }
 
 char Avaliacao::avalia_not(char arg1) {

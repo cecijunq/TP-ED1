@@ -1,23 +1,23 @@
 #include <iostream>
 #include <string>
-#include <regex>
 
 #include "../include/avaliacao.h"
 #include "../include/satisfabilidade.h"
 
+class arg_invalidos {};
 
 int main(int argc, char **argv) {
-    if(argc != 3) {
+    if(argc != 4) {
         std::cout << "Quantidade inválida de parâmetros." << std::endl;
-        return 1;
+        //throw arg_invalidos();
     }
-
-        Avaliacao a = Avaliacao(argv[1], argv[2]);
-        std::cout << "RESULTADO AQUI: " << a.avalia_trecho() << std::endl;
-    /*if(argv[1] == "-a") {
     
-    } else if(argv[1] == "-s")
+    if(argv[1] == std::string("-a")) {
+        Avaliacao a = Avaliacao(argv[2], argv[3]);
+        std::cout << a.avalia_trecho() << std::endl;
+    } else if(argv[1] == std::string("-s")) {
         Satisfabilidade s = Satisfabilidade(argv[2], argv[3]);
-        */
+        std::cout << s.resolve_problema(s.get_raiz()) << std::endl;
+    }
 
 }

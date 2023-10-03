@@ -11,7 +11,6 @@ class Item {
     public:
         Item(char elemento, Item *anterior);
         Item();
-        //Item(int elemento, Item *anterior);
         ~Item();
         char get_elemento();
         void set_elemento(char novo_elemento);

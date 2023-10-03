@@ -1,5 +1,4 @@
 #include "../include/lista.h"
-#include "../include/pilha.h"
 #include <string>
 
 Lista::Lista() {

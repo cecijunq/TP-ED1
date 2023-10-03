@@ -1,7 +1,6 @@
 #ifndef AVALIACAO_H
 #define AVALIACAO_H
 
-//#include "./pilha.h"
 #include "./lista.h"
 #include <vector>
 #include <map>

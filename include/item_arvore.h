@@ -24,6 +24,7 @@ class ItemArvore {
         char get_resultado();
         char get_quantificador();
         std::string get_atributos();
+        void set_atributos(std::string novo_atributos);
 
 };
 

@@ -17,6 +17,7 @@ int ItemArvore::muda_valor_quantificador() {
             _atributos[i] = '1';
             ItemArvore *ramo_dir = new ItemArvore(_atributos);
 
+            _atributos[i] = quantificador;
             esq = ramo_esq;
             dir = ramo_dir;
 
@@ -82,4 +83,8 @@ char ItemArvore::get_quantificador() {
 
 std::string ItemArvore::get_atributos() {
     return _atributos;
+}
+
+void ItemArvore::set_atributos(std::string novo_atributos) {
+    _atributos = novo_atributos;
 }

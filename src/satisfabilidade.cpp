@@ -19,22 +19,38 @@ void Satisfabilidade::insere_recursivo(ItemArvore *aux) {
     }
 }
 
-char Satisfabilidade::resolve_problema(ItemArvore *no) {
+std::string Satisfabilidade::resolve_problema(ItemArvore *no) {
     if(no->get_dir() != nullptr && no->get_esq() != nullptr) {
-        char arg1 = resolve_problema(no->get_esq());
-        char arg2 = resolve_problema(no->get_dir());
+        std::string arg1 = resolve_problema(no->get_esq());
+        std::string arg2 = resolve_problema(no->get_dir());
 
-        if((no->get_quantificador() == 'a') && (arg1 == '1' && arg2 == '1')) {
-            return '1';
-        } else if((no->get_quantificador() == 'e') && (arg1 == '1' && arg2 == '1')) {
-            return '1';
-        } else if((no->get_quantificador() == 'e') && (arg1 == '1' || arg2 == '1')) {
-            return '1';
+        if((no->get_quantificador() == 'a') && (arg1 == "1" && arg2 == "1")) {
+            return "1";
+        } else if((no->get_quantificador() == 'e') && (arg1 == "1" && arg2 == "1")) {
+            return exite_para_todo(no, 'a');
+        } else if((no->get_quantificador() == 'e') && (arg1 == "1")) {
+            no->set_atributos(no->get_esq()->get_atributos());
+            return "1 " + no->get_atributos();
+        } else if((no->get_quantificador() == 'e') && (arg2 == "1")) {
+            no->set_atributos(no->get_dir()->get_atributos());
+            return "1 " + no->get_atributos();
         } else {
-            return '0';
+            return "0";
         }
     }
 
     Avaliacao aval = Avaliacao(_expressao, no->get_atributos());
-    return aval.avalia_trecho();
+    return std::string(1, aval.avalia_trecho());
+}
+
+std::string Satisfabilidade::exite_para_todo(ItemArvore *no, char elem) {
+    std::string aux = no->get_atributos();
+    for(int i = 0; i < aux.size(); i++) {
+        if(aux[i] == 'e') {
+            aux[i] = elem;
+            no->set_atributos(aux);
+            break;
+        }
+    }
+    return "1 " + no->get_atributos();
 }

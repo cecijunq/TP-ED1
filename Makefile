@@ -1,8 +1,8 @@
 #---------------------------------------------------------------------
 # Arquivo	: Makefile
 # Conteúdo	: compilar o programa main
-# Autor		: Wagner Meira Jr. (meira@dcc.ufmg.br)
-# Histórico	: 2022-04-02 - arquivo criado
+# Autor		: Cecília Junqueira V. M. Pereira (ceciliajunq@ufmg.br), baseado no Makefile do prof. Wagner Meira Jr. (meira@dcc.ufmg.br)
+# Histórico	: 2023-10-03 - arquivo criado
 #---------------------------------------------------------------------
 # Opções	: make all - compila tudo e executa exemplo
 #		: make clean - remove objetos e executável
@@ -28,6 +28,7 @@ all:  $(EXE)
 	$(EXE) -a " ~ ( 2 | 0 & 1 ) & ( 3 | 1 ) | ~ 1 " 0111
 	$(EXE) -a " 0 | 1 & 2 " 100
 	$(EXE) -a " ~ 0 | ~ ( 1 & 2 ) " 100
+	$(EXE) -a " 0 | 1 & 2 & 3 | 4 | 5 & ~ 6 & 7 | 8 | ~ 9 & 10 | 11 " 100100111010
 	$(EXE) -s " 0 | 1 & 2 " 0e0
 	$(EXE) -s " 0 | 1 & 2 " e00
 	$(EXE) -s " 0 | 1 & 2 " e11

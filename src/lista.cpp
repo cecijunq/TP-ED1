@@ -7,6 +7,8 @@ Lista::Lista() {
     fim = nullptr;
 }
 
+Lista::~Lista() {}
+
 Item *Lista::get_inicio() {
     return inicio;
 }

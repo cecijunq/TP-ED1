@@ -17,6 +17,16 @@ Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
 
 Avaliacao::Avaliacao() {}
 
+void Avaliacao::Limpa() {
+    Item *aux = stack.get_inicio();
+    while (aux != nullptr) {
+        stack.muda_inicio(aux->get_prox());
+        delete aux;
+        aux = stack.get_inicio();
+    }
+    _tamanho = 0;
+}
+
 int Avaliacao::precedence(char operador) {
     switch (operador) {
     case '~':

@@ -12,6 +12,7 @@ class Lista {
         Item *fim;
     public:
         Lista();
+        ~Lista();
         Item *get_inicio();
         Item *get_fim();
         int getTamanho();

@@ -14,6 +14,7 @@ class Avaliacao {
     public:
         Avaliacao(std::string expressao, std::string atributos);
         Avaliacao();
+        void Limpa();
         int precedence(char operador);
         void postfix(std::string expressao, std::string atributos);
         Lista get_stack();

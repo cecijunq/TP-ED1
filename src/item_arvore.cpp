@@ -7,7 +7,7 @@ ItemArvore::ItemArvore(std::string atributos) {
 }
 
 int ItemArvore::muda_valor_quantificador() {
-    for(int i = 0; i < _atributos.size(); i++) {
+    for(unsigned int i = 0; i < _atributos.size(); i++) {
         if(_atributos[i] == 'a' || _atributos[i] == 'e') {
             quantificador = _atributos[i];
 

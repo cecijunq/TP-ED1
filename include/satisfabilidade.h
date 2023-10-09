@@ -12,6 +12,8 @@ class Satisfabilidade {
 
     public:
         Satisfabilidade(std::string expressao, std::string atributos);
+        ~Satisfabilidade();
+        void Limpa(ItemArvore *no);
         void insere_recursivo(ItemArvore *aux);
         std::string resolve_problema(ItemArvore *no);
         ItemArvore *get_raiz();

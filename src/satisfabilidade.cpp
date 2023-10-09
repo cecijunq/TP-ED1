@@ -7,6 +7,19 @@ Satisfabilidade::Satisfabilidade(std::string expressao, std::string atributos) {
     insere_recursivo(raiz);
 }
 
+void Satisfabilidade::Limpa(ItemArvore *no) {
+    if(no!= nullptr){
+        Limpa(no->get_esq());
+        Limpa(no->get_dir());
+        delete no;
+    }
+}
+
+
+Satisfabilidade::~Satisfabilidade() {
+    Limpa(raiz);
+}
+
 ItemArvore *Satisfabilidade::get_raiz() {
     return raiz;
 }

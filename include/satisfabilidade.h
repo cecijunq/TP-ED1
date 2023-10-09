@@ -7,7 +7,6 @@
 
 class Satisfabilidade {
     private:
-        //Avaliacao *a;
         ItemArvore *raiz;
         std::string _expressao;
 

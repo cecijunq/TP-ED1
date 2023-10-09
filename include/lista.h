@@ -12,7 +12,6 @@ class Lista {
         Item *fim;
     public:
         Lista();
-        //Lista(std::string expressao, std::string atributos);
         Item *get_inicio();
         Item *get_fim();
         int getTamanho();

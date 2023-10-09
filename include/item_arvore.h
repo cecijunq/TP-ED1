@@ -7,7 +7,6 @@
 
 class ItemArvore {
     private:
-        //Avaliacao _item;
         std::string _atributos;
         ItemArvore *esq;
         ItemArvore *dir;
@@ -15,9 +14,7 @@ class ItemArvore {
         char quantificador;
 
     public:
-        //ItemArvore(Avaliacao _item);
         ItemArvore(std::string atributos);
-        //Avaliacao get_avaliacao();
         int muda_valor_quantificador();
         ItemArvore *get_esq();
         ItemArvore *get_dir();

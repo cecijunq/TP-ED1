@@ -12,7 +12,7 @@ Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
     _tamanho = 0;
     stack = Lista();
     operadores = Lista();
-    postfixEval(expressao, atributos);
+    postfix(expressao, atributos);
 }
 
 Avaliacao::Avaliacao() {}
@@ -29,7 +29,7 @@ int Avaliacao::precedence(char operador) {
     return -1;
 }
 
-void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
+void Avaliacao::postfix(std::string expressao, std::string atributos) {
     Item *novo;
 
     for(unsigned int i = 0; i < expressao.size(); i++) {
@@ -84,9 +84,6 @@ void Avaliacao::postfixEval(std::string expressao, std::string atributos) {
                 if(expressao[i+1] >= '0' && expressao[i+1] <= '9') {
                     atrib.insert(atrib.end(),expressao[i]);
                     atrib.insert(atrib.end(),expressao[i+1]);
-                    //atrib.append(expressao[i+1]);
-                    //atrib = std::string(expressao[i]) + std::string(expressao[i+1]);
-                    //std::cout << "aqui: " << expressao[i] << expressao[i+1] << atrib << std::endl;
                     i++;
                 } else {
                     atrib = expressao[i];

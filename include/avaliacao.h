@@ -15,7 +15,7 @@ class Avaliacao {
         Avaliacao(std::string expressao, std::string atributos);
         Avaliacao();
         int precedence(char operador);
-        void postfixEval(std::string expressao, std::string atributos);
+        void postfix(std::string expressao, std::string atributos);
         Lista get_stack();
         char avalia_trecho();
         char avalia_or(char arg1, char arg2);

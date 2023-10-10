@@ -5,6 +5,10 @@
 #include <vector>
 #include <map>
 
+
+class parametros_invalidos {};
+class elemento_invalido {};
+
 class Avaliacao {
     private:
         int _tamanho;

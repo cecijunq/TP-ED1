@@ -15,7 +15,6 @@ void Satisfabilidade::Limpa(ItemArvore *no) {
     }
 }
 
-
 Satisfabilidade::~Satisfabilidade() {
     Limpa(raiz);
 }
@@ -30,7 +29,7 @@ void Satisfabilidade::insere_recursivo(ItemArvore *aux) {
         insere_recursivo(aux->get_esq());
         insere_recursivo(aux->get_esq());
     }
-}
+} // O(2^n)
 
 std::string Satisfabilidade::resolve_problema(ItemArvore *no) {
     if(no->get_dir() != nullptr && no->get_esq() != nullptr) {
@@ -54,7 +53,7 @@ std::string Satisfabilidade::resolve_problema(ItemArvore *no) {
 
     Avaliacao aval = Avaliacao(_expressao, no->get_atributos());
     return std::string(1, aval.avalia_trecho());
-}
+} // O(2^n), t.q. é número de quantificadores
 
 std::string Satisfabilidade::exite_para_todo(ItemArvore *no, char elem) {
     std::string aux = no->get_atributos();
@@ -66,4 +65,4 @@ std::string Satisfabilidade::exite_para_todo(ItemArvore *no, char elem) {
         }
     }
     return "1 " + no->get_atributos();
-}
+} // O(n)

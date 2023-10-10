@@ -1,12 +1,8 @@
 #include "../include/avaliacao.h"
 
-//#include <string>
-
-class ParametrosInvalidos {};
-
 Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
     if(atributos.size() > 10e6 || expressao.size() > 100) {
-        throw ParametrosInvalidos();
+        throw parametros_invalidos();
     }
 
     _tamanho = 0;
@@ -89,7 +85,7 @@ void Avaliacao::postfix(std::string expressao, std::string atributos) {
                     operadores.muda_fim(tmp);
                 }
 
-            } else {
+            } else if(expressao[i] >= '0' && expressao[i] <= '9') {
                 std::string atrib;
                 if(expressao[i+1] >= '0' && expressao[i+1] <= '9') {
                     atrib.insert(atrib.end(),expressao[i]);
@@ -108,6 +104,9 @@ void Avaliacao::postfix(std::string expressao, std::string atributos) {
                 }
                 stack.muda_fim(novo);
                 atrib.clear();
+
+            } else {
+                throw elemento_invalido();
             }
         }
     }

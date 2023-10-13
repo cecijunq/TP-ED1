@@ -13,10 +13,6 @@ Avaliacao::Avaliacao(std::string expressao, std::string atributos) {
 
 Avaliacao::Avaliacao() {}
 
-Avaliacao::~Avaliacao() {
-    Limpa();
-}
-
 void Avaliacao::Limpa() {
     Item *aux = stack.get_inicio();
     while (aux != nullptr) {

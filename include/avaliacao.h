@@ -2,8 +2,6 @@
 #define AVALIACAO_H
 
 #include "./lista.h"
-#include <vector>
-#include <map>
 
 
 class parametros_invalidos {};
@@ -18,10 +16,11 @@ class Avaliacao {
     public:
         Avaliacao(std::string expressao, std::string atributos);
         Avaliacao();
+        ~Avaliacao();
         void Limpa();
         int precedence(char operador);
         void postfix(std::string expressao, std::string atributos);
-        Lista get_stack();
+        //Lista get_stack();
         char avalia_trecho();
         char avalia_or(char arg1, char arg2);
         char avalia_and(char arg1, char arg2);

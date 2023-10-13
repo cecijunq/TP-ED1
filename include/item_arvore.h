@@ -1,7 +1,6 @@
 #ifndef ITEM_ARVORE_H
 #define ITEM_ARVORE_H
 
-//#include "./tipo_item.h"
 #include "./lista.h"
 #include "./avaliacao.h"
 
@@ -12,6 +11,7 @@ class ItemArvore {
         ItemArvore *dir;
         char resultado;
         char quantificador;
+        int pos_quantificador;
 
     public:
         ItemArvore(std::string atributos);
@@ -21,8 +21,9 @@ class ItemArvore {
         char get_resultado();
         char get_quantificador();
         std::string get_atributos();
+        int get_pos_quantificador();
         void set_atributos(std::string novo_atributos);
-
+        void set_resultado(char valor);
 };
 
 #endif

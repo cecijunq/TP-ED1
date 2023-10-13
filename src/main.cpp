@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-//#include <stdexcept>
 #include <getopt.h>
 
 #include "../include/avaliacao.h"
@@ -43,11 +42,10 @@ int main(int argc, char **argv) {
         parse_args(argc,argv);
 
     } catch(qntd_invalida_arg &e) {
-        std::cout << "Quantidade inválida de parâmetros" << std::endl;
+        
         return 1;
 
     } catch(arg_invalidos &e) {
-        std::cout << "Operação inválida" << std::endl;
         return 1;
     }
 
@@ -59,10 +57,8 @@ int main(int argc, char **argv) {
                 av = Avaliacao(argv[2], argv[3]);
 
             } catch(parametros_invalidos &e) {
-                std::cout << "Tamanho inválido do dado de entrada";
                 return 1;
             } catch(elemento_invalido &e) {
-                std::cout << "Entrada possui elementos inválidos";
                 return 1;
             }
             std::cout << av.avalia_trecho() << std::endl;
@@ -71,18 +67,8 @@ int main(int argc, char **argv) {
         case SATISFABILIDADE:
         {
             Satisfabilidade st = Satisfabilidade(argv[2], argv[3]);
-            std::cout << st.resolve_problema(st.get_raiz()) << std::endl;
+            st.avalia_satisfabilidade();
             break;
         }
     }
-    
-    /*
-    if(argv[1] == std::string("-a")) {
-        Avaliacao a = Avaliacao(argv[2], argv[3]);
-        std::cout << a.avalia_trecho() << std::endl;
-    } else if(argv[1] == std::string("-s")) {
-        Satisfabilidade s = Satisfabilidade(argv[2], argv[3]);
-        std::cout << s.resolve_problema(s.get_raiz()) << std::endl;
-    }
-    */
 }

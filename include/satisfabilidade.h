@@ -3,21 +3,21 @@
 
 #include "./avaliacao.h"
 #include "./item_arvore.h"
-#include <vector>
 
 class Satisfabilidade {
     private:
         ItemArvore *raiz;
         std::string _expressao;
+        bool tem_quantificador_existe;
 
     public:
         Satisfabilidade(std::string expressao, std::string atributos);
         ~Satisfabilidade();
         void Limpa(ItemArvore *no);
         void insere_recursivo(ItemArvore *aux);
-        std::string resolve_problema(ItemArvore *no);
-        ItemArvore *get_raiz();
-        std::string exite_para_todo(ItemArvore *no, char elem);
+        char resolve_problema(ItemArvore *no);
+        void exite_para_todo(ItemArvore *no, char elem);
+        void avalia_satisfabilidade();
 };
 
 #endif

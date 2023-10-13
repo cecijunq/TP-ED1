@@ -7,17 +7,19 @@ ItemArvore::ItemArvore(std::string atributos) {
 }
 
 int ItemArvore::muda_valor_quantificador() {
+    std::string para_esq = _atributos;
+    std::string para_dir = _atributos;
     for(unsigned int i = 0; i < _atributos.size(); i++) {
         if(_atributos[i] == 'a' || _atributos[i] == 'e') {
+            pos_quantificador = i;
             quantificador = _atributos[i];
 
-            _atributos[i] = '0';
-            ItemArvore *ramo_esq = new ItemArvore(_atributos);
+            para_esq[i] = '0';
+            ItemArvore *ramo_esq = new ItemArvore(para_esq);
             
-            _atributos[i] = '1';
-            ItemArvore *ramo_dir = new ItemArvore(_atributos);
+            para_dir[i] = '1';
+            ItemArvore *ramo_dir = new ItemArvore(para_dir);
 
-            _atributos[i] = quantificador;
             esq = ramo_esq;
             dir = ramo_dir;
 
@@ -39,6 +41,10 @@ char ItemArvore::get_resultado() {
     return resultado;
 }
 
+void ItemArvore::set_resultado(char valor) {
+    resultado = valor;
+}
+
 char ItemArvore::get_quantificador() {
     return quantificador;
 }
@@ -49,4 +55,8 @@ std::string ItemArvore::get_atributos() {
 
 void ItemArvore::set_atributos(std::string novo_atributos) {
     _atributos = novo_atributos;
+}
+
+int ItemArvore::get_pos_quantificador() {
+    return pos_quantificador;
 }

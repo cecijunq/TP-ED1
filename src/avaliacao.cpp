@@ -105,7 +105,7 @@ void Avaliacao::postfix(std::string expressao, std::string atributos) {
                 } else {
                     atrib = expressao[i];
                 }
-                if(stoi(atrib) >= atributos.size()) throw elemento_invalido();
+                if(unsigned (stoi(atrib)) >= atributos.size()) throw elemento_invalido();
                 _tamanho++;
                 if(stack.get_inicio() == nullptr) {
                     novo = new Item(atributos[stoi(atrib)], nullptr);

@@ -60,11 +60,16 @@ void Avaliacao::postfix(std::string expressao, std::string atributos) {
 
                         }
                         operadores.muda_fim(operadores.get_fim()->get_ant());
-                        if(operadores.get_fim() != nullptr && operadores.get_fim()->get_elemento() == '~') {
+                        if(operadores.get_fim() != nullptr) {
+                            operadores.get_fim()->set_novo_prox(nullptr);
+                        }
+                        while(operadores.get_fim() != nullptr && operadores.get_fim()->get_elemento() == '~') {
                             stack.get_fim()->set_novo_prox(operadores.get_fim());
                             operadores.muda_fim(operadores.get_fim()->get_ant());
                             stack.get_fim()->get_prox()->set_novo_ant(stack.get_fim());
                             stack.muda_fim(stack.get_fim()->get_prox());
+                            if(operadores.get_fim() != nullptr)
+                                operadores.get_fim()->set_novo_prox(nullptr);
                         }
                         if(operadores.get_fim() != nullptr) {
                             operadores.get_fim()->set_novo_prox(nullptr);
@@ -92,6 +97,8 @@ void Avaliacao::postfix(std::string expressao, std::string atributos) {
                         operadores.muda_inicio(aux);
                     tmp->set_novo_ant(stack.get_fim());
                     stack.muda_fim(tmp);
+                    tmp->set_novo_prox(nullptr);
+                
 
                 }
                 
@@ -123,6 +130,11 @@ void Avaliacao::postfix(std::string expressao, std::string atributos) {
         }
     }
   
+    /*std::cout << "antes while" << std::endl;
+    for(Item *i = stack.get_inicio(); i != nullptr; i = i->get_prox()) {
+        std::cout << i->get_elemento() << " ";
+    }
+    std::cout << std::endl;*/
     while(operadores.get_fim() != nullptr) {
         stack.get_fim()->set_novo_prox(operadores.get_fim());
         operadores.muda_fim(operadores.get_fim()->get_ant());
@@ -134,6 +146,12 @@ void Avaliacao::postfix(std::string expressao, std::string atributos) {
             operadores.muda_inicio(nullptr);
         _tamanho++;
     }
+
+    /*std::cout << "depois while" << std::endl;
+    for(Item *i = stack.get_inicio(); i != nullptr; i = i->get_prox()) {
+        std::cout << i->get_elemento() << " ";
+    }
+    std::cout << std::endl;*/
 }
 
 char Avaliacao::avalia_trecho() {
@@ -146,6 +164,8 @@ char Avaliacao::avalia_trecho() {
                 aux->set_elemento(avalia_not(arg1->get_elemento()));
                 if(arg1->get_ant() != nullptr)
                     arg1->get_ant()->set_novo_prox(aux);
+                else
+                    stack.muda_inicio(aux);
                 aux->set_novo_ant(arg1->get_ant());
                 break;
 

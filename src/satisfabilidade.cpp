@@ -28,7 +28,6 @@ void Satisfabilidade::insere_recursivo(ItemArvore *aux) {
     }
 } // O(2^n)
 
-int i = 0;
 char Satisfabilidade::resolve_problema(ItemArvore *no) {
     if(no->get_dir() != nullptr && no->get_esq() != nullptr) {
         char arg1 = resolve_problema(no->get_esq());
@@ -38,8 +37,7 @@ char Satisfabilidade::resolve_problema(ItemArvore *no) {
             char pos = no->get_esq()->get_pos_quantificador();
 
             if(no->get_esq()->get_atributos()[pos] == no->get_dir()->get_atributos()[pos]) {
-                char elem_quantif = no->get_dir()->get_atributos()[pos];
-                exite_para_todo(no, elem_quantif);
+                exite_para_todo(no, 'a', no->get_dir());
             } else {
                 if(no->get_esq()->get_atributos()[pos] == 'a') {
                     std::string aux = no->get_atributos();
@@ -52,14 +50,12 @@ char Satisfabilidade::resolve_problema(ItemArvore *no) {
                 }
             }
 
-            //i++;
             no->set_resultado('1');
             return '1';
             
         } else if((no->get_quantificador() == 'e') && (arg1 == '1' && arg2 == '1')) {
             tem_quantificador_existe = true;
-            exite_para_todo(no, 'a');
-            //i++;
+            exite_para_todo(no, 'a', no->get_dir());
             no->set_resultado('1');
             return '1';
 
@@ -68,8 +64,7 @@ char Satisfabilidade::resolve_problema(ItemArvore *no) {
 
             int elem_pos = no->get_pos_quantificador();
             char elem_quantif = no->get_esq()->get_atributos()[elem_pos];
-            exite_para_todo(no, elem_quantif);
-            //i++;
+            exite_para_todo(no, elem_quantif, no->get_esq());
             no->set_resultado('1');
 
             return '1';
@@ -78,9 +73,8 @@ char Satisfabilidade::resolve_problema(ItemArvore *no) {
             tem_quantificador_existe = true;
             int elem_pos = no->get_pos_quantificador();
             char elem_quantif = no->get_dir()->get_atributos()[elem_pos];
-            exite_para_todo(no, elem_quantif);
+            exite_para_todo(no, elem_quantif, no->get_dir());
 
-            //i++;
             no->set_resultado('1');
 
             return '1';
@@ -92,14 +86,13 @@ char Satisfabilidade::resolve_problema(ItemArvore *no) {
     }
 
     Avaliacao aval = Avaliacao(_expressao, no->get_atributos());
-    i++;
     no->set_resultado(aval.avalia_trecho());
     return aval.avalia_trecho();
 } // O(2^n), t.q. n é número de quantificadores
 
-void Satisfabilidade::exite_para_todo(ItemArvore *no, char elem) {
-    std::string aux = no->get_atributos();
+void Satisfabilidade::exite_para_todo(ItemArvore *no, char elem, ItemArvore *anterior) {
     int index_quantif = no->get_pos_quantificador();
+    std::string aux = anterior->get_atributos();
     aux[index_quantif] = elem;
     no->set_atributos(aux);
 } // O(n)

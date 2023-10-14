@@ -16,7 +16,7 @@ class Satisfabilidade {
         void Limpa(ItemArvore *no);
         void insere_recursivo(ItemArvore *aux);
         char resolve_problema(ItemArvore *no);
-        void exite_para_todo(ItemArvore *no, char elem);
+        void exite_para_todo(ItemArvore *no, char elem, ItemArvore *anterior);
         void avalia_satisfabilidade();
 };
 

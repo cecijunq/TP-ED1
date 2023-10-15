@@ -4,6 +4,7 @@
 #include "./avaliacao.h"
 #include "./item_arvore.h"
 
+class qntd_invalida_quantif {};
 class Satisfabilidade {
     private:
         ItemArvore *raiz;

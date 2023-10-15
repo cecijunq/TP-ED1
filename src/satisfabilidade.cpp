@@ -3,6 +3,13 @@
 Satisfabilidade::Satisfabilidade(std::string expressao, std::string atributos) {
     _expressao = expressao;
     tem_quantificador_existe = false;
+    int n_quantificadores = 0;
+    for(int i = 0; i < atributos.size(); i++) {
+        if(atributos[i] == 'a' || atributos[i] == 'e') {
+            n_quantificadores++;
+            if(n_quantificadores > 5) throw qntd_invalida_quantif();
+        }
+    }
 
     raiz = new ItemArvore(atributos);
     insere_recursivo(raiz);

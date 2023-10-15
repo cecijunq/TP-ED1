@@ -50,6 +50,7 @@ int main(int argc, char **argv) {
     }
 
     switch(opescolhida) {
+
         case AVALIACAO:
         {
             Avaliacao av;
@@ -66,8 +67,34 @@ int main(int argc, char **argv) {
         }
         case SATISFABILIDADE:
         {
+            /*std::string at = argv[3];
+            int n_quantificadores = 0;
+            for(int i = 0; i < at.size(); i++) {
+                if(argv[3][i] == 'a' || argv[3][i] == 'e') {
+                    n_quantificadores++;
+                    if(n_quantificadores > 5) return 1;
+                }
+            }*/
+            /*std::string at = argv[3];
+            int n_quantificadores = 0;
+            for(unsigned int i = 0; i < at.size(); i++) {
+                if(argv[3][i] == 'a' || argv[3][i] == 'e') {
+                    n_quantificadores++;
+                    if(n_quantificadores > 5) return 1;
+                }
+            }
             Satisfabilidade st = Satisfabilidade(argv[2], argv[3]);
             st.avalia_satisfabilidade();
+            break;*/
+            try {
+                Satisfabilidade st = Satisfabilidade(argv[2], argv[3]);
+                st.avalia_satisfabilidade();
+
+            } catch(qntd_invalida_quantif &e) {
+                return 1;
+            } catch(elemento_invalido &e) {
+                return 1;
+            }
             break;
         }
     }
